@@ -272,6 +272,7 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
      */
     private static final String MAVEN_DEPLOY_PLUGIN = "org.apache.maven.plugins:maven-deploy-plugin";
     private static final String NEXUS_STAGING_PLUGIN = "org.sonatype.plugins:nexus-staging-maven-plugin";
+    private static final String CENTRAL_PUBLISHING_PLUGIN = "org.sonatype.central:central-publishing-maven-plugin";
 
     /**
      * Returns a reference to the current project.
@@ -608,7 +609,11 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
                 || isDeployable(project,
                         NEXUS_STAGING_PLUGIN,
                         "skipNexusStagingDeployMojo",
-                        "skipNexusStagingDeployMojo");
+                        "skipNexusStagingDeployMojo")
+                || isDeployable(project,
+                        CENTRAL_PUBLISHING_PLUGIN,
+                        "skipPublishing",
+                        "skipPublishing");
     }
 
     private static boolean isDeployable(final MavenProject project,
